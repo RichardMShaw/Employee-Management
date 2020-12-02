@@ -1,7 +1,5 @@
 const mysql = require('mysql2')
 
-const db = mysql.createConnection('mysql://root:rootroot@localhost/employees_db')
-
 db.query('SELECT * FROM departments', (err, departments) => {
   if (err) { console.log(err) }
   console.log(departments)

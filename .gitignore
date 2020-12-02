@@ -2,7 +2,11 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=vscode,node,windows
 
 ### SQL ###
+./keys
+
+### SQL ###
 ./sql
+
 ### Node ###
 # Logs
 logs
