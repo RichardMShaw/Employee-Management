@@ -1,3 +1,5 @@
-const dbKey = 'mysql://root:rootroot@localhost/employees_db'
+const keys = {
+  dbKey: 'mysql://root:rootroot@localhost/employees_db'
+}
 
-module.exports = dbKey
+module.exports = keys

@@ -1,8 +1,8 @@
 const router = require('express').Router()
-const dbKey = require('../keys')
+const { dbKey } = require('../keys')
 const db = mysql.createConnection(dbKey)
 
-router.post('/employees', (req, res) => {
+router.get('/employees', (req, res) => {
 
 })
 
