@@ -2,9 +2,10 @@
   "name": "Employee-Management",
   "version": "1.0.0",
   "description": "",
-  "main": "employees.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,8 @@
   },
   "homepage": "https://github.com/RichardMShaw/Employee-Management#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "console.table": "^0.10.0",
+    "inquirer": "^7.3.3",
     "mysql2": "^2.2.5"
   }
 }
