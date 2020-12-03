@@ -534,7 +534,7 @@ const addEmployee = () => {
             type: 'list',
             name: 'option',
             message: 'What would you like to do next:',
-            choices: ['Add Another Employee', 'Add Something Else', 'Return to Main Menu']
+            choices: ['Add Another Employee', 'Return to Add Menu', 'Return to Main Menu']
           }
         ])
           .then(({ option }) => {
@@ -591,7 +591,7 @@ const addRole = () => {
             type: 'list',
             name: 'option',
             message: 'What would you like to do next:',
-            choices: ['Add Another Role', 'Add Something Else', 'Return to Main Menu']
+            choices: ['Add Another Role', 'Return to Add Menu', 'Return to Main Menu']
           }
         ])
           .then(({ option }) => {
@@ -632,7 +632,7 @@ const addDepartment = () => {
             type: 'list',
             name: 'option',
             message: 'What would you like to do next:',
-            choices: ['Add Another Department', 'Add Something Else', 'Return to Main Menu']
+            choices: ['Add Another Department', 'Return to Add Menu', 'Return to Main Menu']
           }
         ])
           .then(({ option }) => {
