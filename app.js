@@ -199,8 +199,8 @@ const viewMenu = () => {
     {
       type: 'list',
       name: 'option',
-      message: 'Which of the following would you like to view',
-      choices: ['Departments', 'Roles', 'Employees']
+      message: 'Which of the following would you like to view:',
+      choices: ['Departments', 'Roles', 'Employees', 'Return to Main Menu']
     }
   ])
     .then(({ option }) => {
@@ -211,6 +211,7 @@ const viewMenu = () => {
               console.log(err)
             } else {
               console.table(departments)
+              viewMenu()
             }
           })
           break
@@ -220,6 +221,7 @@ const viewMenu = () => {
               console.log(err)
             } else {
               console.table(departments)
+              viewMenu()
             }
           })
           break
@@ -229,8 +231,12 @@ const viewMenu = () => {
               console.log(err)
             } else {
               console.table(departments)
+              viewMenu()
             }
           })
+          break
+        case 'Return to Main Menu':
+          mainMenu()
           break
       }
     })
@@ -257,6 +263,7 @@ const mainMenu = () => {
           addMenu()
           break
         case 'View departments, roles, employees':
+          viewMenu()
           break
         case 'Update employee roles':
           break
