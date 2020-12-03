@@ -4,6 +4,32 @@ require('console.table')
 const { dbKey } = require('./keys')
 const db = mysql.createConnection(dbKey)
 
+
+const updateMenu = () => {
+  db.query('SELECT * FROM employees', (err, employees) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.table(roles)
+      inquirer.prompt([
+        {
+          type: 'input',
+          name: 'id',
+          message: 'Enter the id of the employee you wish to edit (leave blank to return to the main menu):',
+          validate: function (res) {
+            let id = parseInt(res)
+            return (!isNaN(id) && id > 0)
+          }
+        }
+      ])
+        .then(({ id }) => {
+          updateEmployee(id)
+        })
+        .catch(err => console.log(err))
+    }
+  })
+}
+
 const addEmployee = () => {
   inquirer.prompt([
     {
@@ -211,26 +237,27 @@ const viewMenu = () => {
               console.log(err)
             } else {
               console.table(departments)
+              console.log(departments[0].id)
               viewMenu()
             }
           })
           break
         case 'Roles':
-          db.query('SELECT * FROM roles', (err, departments) => {
+          db.query('SELECT * FROM roles', (err, roles) => {
             if (err) {
               console.log(err)
             } else {
-              console.table(departments)
+              console.table(roles)
               viewMenu()
             }
           })
           break
         case 'Employees':
-          db.query('SELECT * FROM employees', (err, departments) => {
+          db.query('SELECT * FROM employees', (err, employees) => {
             if (err) {
               console.log(err)
             } else {
-              console.table(departments)
+              console.table(employees)
               viewMenu()
             }
           })
