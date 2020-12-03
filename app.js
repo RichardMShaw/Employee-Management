@@ -43,7 +43,8 @@ const addEmployee = () => {
       if (managerId === '') {
         managerId = null
       }
-      db.query(`INSERT INTO roles SET ?`, { firstName, lastName, roleId, managerId }, (err, employees) => {
+      console.log({ firstName, lastName, roleId, managerId })
+      db.query(`INSERT INTO employees SET ?`, { firstName, lastName, roleId, managerId }, (err, employees) => {
         if (err) {
           console.log(err)
         } else {
@@ -254,6 +255,8 @@ const mainMenu = () => {
     })
     .catch(err => console.log(err))
 }
+
+mainMenu()
 
 // db.query('SELECT * FROM departments', (err, departments) => {
 //   if (err) { console.log(err) }
