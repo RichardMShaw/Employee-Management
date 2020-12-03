@@ -1,5 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-# Note-Time
+# Employee-Management
 ## Description
 An employee management app created to test out mysql.
 
