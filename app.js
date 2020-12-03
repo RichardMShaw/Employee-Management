@@ -19,7 +19,7 @@ const addEmployee = () => {
     {
       type: 'input',
       name: 'roleId',
-      message: 'What role do they have:',
+      message: `What is their role ID:`,
       validate: function (res) {
         return !isNaN(parseInt(res))
       }
@@ -31,37 +31,40 @@ const addEmployee = () => {
       validate: function (res) {
         return (res === '' || !isNaN(parseInt(res)))
       }
-    },
-    {
-      type: 'list',
-      name: 'option',
-      message: 'What would you like to do next:',
-      choices: ['Add Another Employee', 'Add Something Else', 'Return to Main Menu']
     }
   ])
-    .then(({ firstName, lastName, roleId, managerId, option }) => {
-      if (managerId === '') {
-        managerId = null
+    .then(employee => {
+      if (employee.managerId === '') {
+        employee.managerId = null
       }
-      console.log({ firstName, lastName, roleId, managerId })
-      db.query(`INSERT INTO employees SET ?`, { firstName, lastName, roleId, managerId }, (err, employees) => {
+      db.query(`INSERT INTO employees SET ?`, employee, err => {
         if (err) {
           console.log(err)
         } else {
-          console.table(employees)
+          console.log('Employee Added!')
         }
+        inquirer.prompt([
+          {
+            type: 'list',
+            name: 'option',
+            message: 'What would you like to do next:',
+            choices: ['Add Another Employee', 'Add Something Else', 'Return to Main Menu']
+          }
+        ])
+          .then(({ option }) => {
+            switch (option) {
+              case 'Add Another Employee':
+                addEmployee()
+                break
+              case 'Add Something Else':
+                addMenu()
+                break
+              case 'Return to Main Menu':
+                mainMenu()
+                break
+            }
+          })
       })
-      switch (option) {
-        case 'Add Another Employee':
-          addEmployee()
-          break
-        case 'Add Something Else':
-          addMenu()
-          break
-        case 'Return to Main Menu':
-          mainMenu()
-          break
-      }
     })
     .catch(err => console.log(err))
 }
@@ -88,33 +91,37 @@ const addRole = () => {
       validate: function (res) {
         return !isNaN(parseInt(res))
       }
-    },
-    {
-      type: 'list',
-      name: 'option',
-      message: 'What would you like to do next:',
-      choices: ['Add Another Role', 'Add Something Else', 'Return to Main Menu']
     }
   ])
-    .then(({ title, salary, departmentId, option }) => {
-      db.query(`INSERT INTO roles SET ?`, { name, salary, departmentId }, (err, roles) => {
+    .then(role => {
+      db.query(`INSERT INTO roles SET ?`, role, err => {
         if (err) {
           console.log(err)
         } else {
-          console.table(roles)
+          console.log('Role Added!')
         }
+        inquirer.prompt([
+          {
+            type: 'list',
+            name: 'option',
+            message: 'What would you like to do next:',
+            choices: ['Add Another Role', 'Add Something Else', 'Return to Main Menu']
+          }
+        ])
+          .then(({ option }) => {
+            switch (option) {
+              case 'Add Another Role':
+                addRole()
+                break
+              case 'Add Something Else':
+                addMenu()
+                break
+              case 'Return to Main Menu':
+                mainMenu()
+                break
+            }
+          })
       })
-      switch (option) {
-        case 'Add Another Role':
-          addRole()
-          break
-        case 'Add Something Else':
-          addMenu()
-          break
-        case 'Return to Main Menu':
-          mainMenu()
-          break
-      }
     })
     .catch(err => console.log(err))
 }
@@ -125,33 +132,37 @@ const addDepartment = () => {
       type: 'input',
       name: 'name',
       message: 'Please give the new department a name:'
-    },
-    {
-      type: 'list',
-      name: 'option',
-      message: 'What would you like to do next:',
-      choices: ['Add Another Department', 'Add Something Else', 'Return to Main Menu']
     }
   ])
-    .then(({ name, option }) => {
-      db.query(`INSERT INTO departments SET ?`, { name }, (err, departments) => {
+    .then(department => {
+      db.query(`INSERT INTO departments SET ?`, department, err => {
         if (err) {
           console.log(err)
         } else {
-          console.table(departments)
+          console.log('Department Added!')
         }
+        inquirer.prompt([
+          {
+            type: 'list',
+            name: 'option',
+            message: 'What would you like to do next:',
+            choices: ['Add Another Department', 'Add Something Else', 'Return to Main Menu']
+          }
+        ])
+          .then(({ option }) => {
+            switch (option) {
+              case 'Add Another Department':
+                addDepartment()
+                break
+              case 'Add Something Else':
+                addMenu()
+                break
+              case 'Return to Main Menu':
+                mainMenu()
+                break
+            }
+          })
       })
-      switch (option) {
-        case 'Add Another Department':
-          addDepartment()
-          break
-        case 'Add Something Else':
-          addMenu()
-          break
-        case 'Return to Main Menu':
-          mainMenu()
-          break
-      }
     })
     .catch(err => console.log(err))
 }
@@ -161,7 +172,7 @@ const addMenu = () => {
     {
       type: 'list',
       name: 'option',
-      message: 'Which of the following would you like to add',
+      message: 'Which of the following would you like to add:',
       choices: ['Departments', 'Roles', 'Employees', 'Return to Main Menu']
     }
   ])
