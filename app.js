@@ -4,6 +4,81 @@ require('console.table')
 const { dbKey } = require('./keys')
 const db = mysql.createConnection(dbKey)
 
+// const getSalary = (roles, roleId) => {
+//   let len = roles.length
+//   for (let i = 0; i < len; i++) {
+//     if (roles[i].id === roleId) {
+//       return roles[i].salary
+//     }
+//   }
+//   return 0
+// }
+
+// const totalBudget = (departmentId) => {
+//   db.query(`SELECT id FROM roles WHERE departmentId = ${departmentId}`,(err,depRoles)=>{
+//     if(err){
+//       console.log(err)
+//       mainMenu()
+//     } else {
+//       let len = depRoles.length
+//       for(let i = 0; i < len; i++){
+
+//       }
+//     }
+//   })
+//   db.query(`SELECT roleId FROM employees WHERE departmentId = ${departmentId}`, (err, employees) => {
+//     if (err) {
+//       console.log(err)
+//       mainMenu()
+//     } else {
+//       db.query(`SELECT * FROM roles`, (err, roles) => {
+//         if (err) {
+//           mainMenu()
+//           console.log(err)
+//         } else {
+//           let total = 0
+//           let len = employees.length
+//           for (let i = 0; i < len; i++) {
+//             total += getSalary(roles, employees[i].roleId)
+//           }
+//           console.log(`This department currently spends a total of ${total}USD a year on employee salaries.`)
+//           budgetMenu()
+//         }
+//       })
+//     }
+//   })
+// }
+
+// const budgetMenu = () => {
+//   db.query('SELECT * FROM departments', (err, departments) => {
+//     if (err) {
+//       console.log(err)
+//       mainMenu()
+//     } else {
+//       console.table(departments.sort((a, b) => { return a.id - b.id }))
+//       inquirer.prompt([
+//         {
+//           type: 'list',
+//           name: 'choice',
+//           message: 'Select a department to check how much money you spend on salaries:',
+//           choices: departments.map(department => {
+//             return department.id
+//           })
+//             .concat(['Return to Main Menu'])
+//             .sort((a, b) => { return a - b })
+//         }
+//       ])
+//         .then(({ choice }) => {
+//           if (choice === 'Return to Main Menu') {
+//             mainMenu()
+//           } else {
+//             totalBudget(choice)
+//           }
+//         })
+//         .catch(err => console.log(err))
+//     }
+//   })
+// }
 const deleteEmployee = () => {
   db.query('SELECT * FROM employees', (err, employees) => {
     if (err) {
@@ -688,28 +763,3 @@ const mainMenu = () => {
 }
 
 mainMenu()
-
-// db.query('SELECT * FROM departments', (err, departments) => {
-//   if (err) { console.log(err) }
-//   console.log(departments)
-// })
-
-// db.query(`
-//   SELECT roles.id, roles.title, roles.salary, departments.name AS department
-//   FROM roles
-//   LEFT JOIN departments
-//   ON roles.departmentId = departments.id
-//   `, (err, roles) => {
-//     if (err) { console.log(err) }
-//     console.log(roles)
-//   })
-
-// db.query(`
-//   SELECT employees.id, employees.firstName, employees.lastName, roles.title, roles.salary, departments.name AS department, CONCAT(manager.firstName, ' ', manager.lastName) AS manager
-//   FROM employees LEFT JOIN roles ON employees.roleId = roles.id
-//   LEFT JOIN departments ON roles.departmentId = departments.id
-//   LEFT JOIN employees manager ON manager.id = employees.managerId
-// `, (err, employees) => {
-//   if (err) { console.log(err) }
-//   console.log(employees)
-// })

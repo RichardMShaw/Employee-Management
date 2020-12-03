@@ -11,9 +11,9 @@ db.query(`
   LEFT JOIN departments
   ON roles.departmentId = departments.id
   `, (err, roles) => {
-    if (err) { console.log(err) }
-    console.log(roles)
-  })
+  if (err) { console.log(err) }
+  console.log(roles)
+})
 
 db.query(`
   SELECT employees.id, employees.firstName, employees.lastName, roles.title, roles.salary, departments.name AS department, CONCAT(manager.firstName, ' ', manager.lastName) AS manager
